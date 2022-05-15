@@ -1,1 +1,90 @@
+"""
+Purpose: interactive search of a data set using a binary search tree
+Name: Ethan Scott
+Date:4/14/22
+"""
 
+def insert(root, key):
+    """Insert a new key into the BST with the given root
+
+    :param root: the list representing the BST
+    :param key: the key to insert
+
+    :return: list representing the new BST
+    """
+    if not isinstance(root, list):
+        return []
+
+    if not isinstance(key, int):
+        return root
+
+    if root==None:  
+        return []
+
+    if key==None:   
+        return root
+    
+    if root==[]: #base case 1: root is empty, return bst with key as root
+        bst = [key, [], []] 
+        return bst
+
+    if key>root[0]: #if key is greater than root compare with right element until base case reached
+        root[2] = insert(root[2], key)
+        return root
+
+    #if key is less than root compare with right element until base case reached
+    root[1] = insert(root[1], key)
+    return root 
+            
+def search(root, key):
+    """Search for a target key in the BST with the given root.
+
+    :param root: the list representing the BST
+    :param key: the key to search for
+
+    :return whether or not key was found
+    :rtype Boolean
+    """
+    if not isinstance(root, list):
+        return False
+
+    if not isinstance(key, int):
+        return False
+   
+    if len(root)==0: #base case 1: not found
+        return False
+    
+    if root[0]==key: #base case 2: key found in BST 
+        return True
+    
+    if key<root[0]:
+        return search(root[1], key) #if less than search left
+    
+    if key>root[0]:
+        return search(root[2], key) #if greater than search right 
+        
+def sort(data):
+    """Sort the data into a new BST
+    :param data: an unsorted list of data to be sorted in a BST
+
+    :return a sorted BST
+    :rtype list
+    """
+    if not isinstance(data, list): #covers all test cases in test file
+        return []
+
+    if data==[]: # if data is empty return empty list
+        return []
+
+    root = [] #create root as empty list, needs to be list for insert function in for loop for work
+    
+    for element in data: #for loop inserting each element into root one at a time
+        root = insert(root, element)
+
+    return root
+
+def main():
+    print('Use your main function as you see fit')
+
+if __name__ == '__main__':
+    main()
