@@ -51,10 +51,10 @@ def search(root, key):
     if not isinstance(key, int):
         return False
    
-    if len(root)==0: #base case 1: not found
+    if len(root)==0: #base case 1 
         return False
     
-    if root[0]==key: #base case 2: key found in BST 
+    if root[0]==key: #base case 2
         return True
     
     if key<root[0]:
